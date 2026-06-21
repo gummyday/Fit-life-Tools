@@ -1201,10 +1201,9 @@ function openProfileModal() {
     
     // Update profile display
     document.getElementById('profile-username-display').textContent = state.user;
-    document.getElementById('profileTokenCount').textContent = state.tokens;
     
-    // Check claim status
-    updateClaimSectionUI();
+    // Update scan quota and subscription UI
+    updateUserStatusUI();
     updateSubscriptionUI();
     
     const modal = document.getElementById('profileModal');
@@ -1416,19 +1415,10 @@ function logoutUser() {
 }
 
 function updateTokenUI() {
-    document.getElementById('navTokenCount').textContent = state.tokens;
-    const profileTokens = document.getElementById('profileTokenCount');
-    if (profileTokens) {
-        profileTokens.textContent = state.tokens;
-    }
-    
-    // Persist in session and user profile
-    localStorage.setItem('fitlife_tokens', state.tokens);
-    if (state.user) {
-        const userKey = `fitlife_user_tokens_${state.user.toLowerCase()}`;
-        localStorage.setItem(userKey, state.tokens);
-    }
+    // Token system replaced by premium scan quota — use updateUserStatusUI() instead
+    updateUserStatusUI();
 }
+
 
 function saveUserScans() {
     localStorage.setItem('fitlife_daily_scans', state.dailyScans);
